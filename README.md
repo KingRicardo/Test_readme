@@ -1,3 +1,16 @@
+# Text-Annotator(候选命名)
+
+Text-Annotator是一款适用于OCR领域的半自动化图形标注工具，相较于现有的OCR标注工具（PPORCLabel，Labelme，T3等），Text-Annotator拥有以下优势：
+
+- Text-Annotator基于COCO-Annotator开发，是一个支持多人协作的Web端图像标注工具，同时拥有友好的图形化交互界面，以及全面的工具包，包括：Bounding box工具、Polygon工具和画刷工具等。 
+- 搭载更先进的预标注算法。本工具搭载有ABCNet端到端文本检测和识别算法，较业界工具，如百度PPOCRLabel，拥有更优异的文本标注能力。
+- 首个搭载人机协作标注算法的工具。本工具搭载有交互式标注算法，SBE模型，用户只需要标注文本中心线即可完成不规则文本的标注，相较于Polygon标注，标注效率更高。
+- 首个搭载置信度校准的文本识别模型的工具。本工具所搭载的置信度校准的文本识别模型通过置信度高低指示用户是否需要对识别标注进行校验，避免全数据集校验，加快校验效率。
+
+## 工具演示
+
+[[演示视频](https://www.bilibili.com/video/BV1f5411T78s/)]
+
 # Quick start demo
 
 - 进入标注系统：116.57.73.173:8200
@@ -7,19 +20,25 @@
 
 - 点击进入已创建的数据集，选择一张图片进行标注
 
-### 工具具体位置
+## 工具具体位置
 
 ![具体位置](img/button_2.png)
 
-### Centerpoint Tool
+## 预标注
 
-中心线标注算法，即文本检测识别的半自动标注算法。具体使用方法如下：
+- 点击左下角的`Image Settings`（齿轮按钮），更改地址为`/api/models/detect_model`，再点击左侧工具`Annotate Tool`，即可调用默认模型ABCNet。
 
-1. 创建新的标注，并点击左侧工具栏的`Centerpoint Tool`
+![具体位置](img/Detetmodel.png)
+
+## Centerpoint Tool
+
+- 中心线标注算法，即文本检测识别的半自动标注算法。具体使用方法如下：
+
+1. 点解右侧“+”符号按钮创建新的标注，并点击左侧工具栏的`Centerpoint Tool`
 
 ![创建新标注](img/add_annotation_1.png)
 
-2. 先标注每个文本行的两个端点（中心线端点）
+2. 鼠标左键依次点击每个文本行的两个端点，先标注文本中心线的端点
 
 ![two_point](img/point1.PNG)
 
@@ -31,20 +50,17 @@
 
 4. 完成标注后，按下`z`键即可调用算法(或者标注点数达到**5个点**，会自动调用算法)
 
-- 注: 识别出的文本会以`{"name":text}`的形式存在metadata里，即以每个标注的名字的形式存在，若识别结果有误，点击每个标注右边的设置（齿轮按钮），修改`Name`,即可更改对应的标注文本。
+- 注: 识别出的文本会显示在右侧列表名字中，若识别结果有误，点击列表中每个标注项目右边的设置（齿轮）按钮，修改`Name`,即可更改对应的标注文本。
 
 ![修改文本](img/edit_text.png)
 
 ![修改name](img/edit_name.png)
 
-### 预标注模型
-
-点击左下角的`Image Settings`（齿轮按钮），更改地址为`/api/models/detect_model`，再点击左侧工具`Annotate Image`，即可调用默认模型ABCNet
-
 # 任务发布者说明
 
 ## 开始
 
+    cd coco-annotator
     docker-compose -f docker-compose.dev.yml up --build
 
 访问8200端口即可进入标注系统
