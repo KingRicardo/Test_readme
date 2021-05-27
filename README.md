@@ -28,7 +28,7 @@ Text-Annotator是一款适用于OCR领域的半自动化图形标注工具，相
 
 - 点击左下角的`Image Settings`（齿轮按钮），更改地址为`/api/models/detect_model`，再点击左侧工具`Annotate Tool`，即可调用默认模型ABCNet。
 
-![具体位置](img/Settings.png)
+![具体位置](img/settings.png)
 
 ## Centerpoint Tool
 
